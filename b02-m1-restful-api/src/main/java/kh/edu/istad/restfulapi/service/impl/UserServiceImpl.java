@@ -1,5 +1,6 @@
 package kh.edu.istad.restfulapi.service.impl;
 
+import kh.edu.istad.restfulapi.dto.UserResponse;
 import kh.edu.istad.restfulapi.model.User;
 import kh.edu.istad.restfulapi.repository.UserRepository;
 import kh.edu.istad.restfulapi.service.UserService;
@@ -16,8 +17,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public List<User> getAll() {
-        return userRepository.selectAll();
+    public List<UserResponse> getAll() {
+        return userRepository.selectAll()
+                .stream()
+                .map(user -> new UserResponse(user.getId(),
+                        user.getFullName(),
+                        user.getIsActive()))
+                .toList();
     }
 
     @Override
