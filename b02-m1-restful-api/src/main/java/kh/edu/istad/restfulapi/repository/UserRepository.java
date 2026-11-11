@@ -22,12 +22,21 @@ public class UserRepository {
         users.add(user3);
     }
 
+    public boolean checkById(UUID id) {
+        return users.stream()
+                .anyMatch(user -> user.getId().equals(id));
+    }
+
     public List<User> selectAll() {
         return users;
     }
 
     public void insertOne(User user) {
         users.add(user);
+    }
+
+    public void deleteOne(UUID id) {
+        users.removeIf(user -> user.getId().equals(id));
     }
 
 }

@@ -9,6 +9,12 @@ import java.util.UUID;
 
 public interface UserService {
 
+    // Delete user by ID
+    // Return type
+    // Parameter type
+    void deleteById(UUID id);
+
+
     UserResponse create(UserCreateRequest userCreateRequest);
 
     List<UserResponse> getAll();

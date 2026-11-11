@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -16,6 +17,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable UUID id) {
+        userService.deleteById(id);
+    }
 
 
     @ResponseStatus(HttpStatus.CREATED) // customize response status code

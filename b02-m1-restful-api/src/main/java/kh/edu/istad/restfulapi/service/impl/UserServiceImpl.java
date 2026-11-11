@@ -19,6 +19,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public void deleteById(UUID id) {
+        // validate user ID
+        if (!userRepository.checkById(id)) {
+            throw new RuntimeException("User not found");
+        }
+
+        userRepository.deleteOne(id);
+    }
+
+
+    @Override
     public UserResponse create(UserCreateRequest userCreateRequest) {
         // 1. Map data from dto to domain model
         User user = new User();
