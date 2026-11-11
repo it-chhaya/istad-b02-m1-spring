@@ -1,11 +1,10 @@
 package kh.edu.istad.restfulapi.controller;
 
+import kh.edu.istad.restfulapi.dto.UserCreateRequest;
 import kh.edu.istad.restfulapi.dto.UserResponse;
 import kh.edu.istad.restfulapi.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +15,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+
+    @PostMapping
+    public void create(@RequestBody UserCreateRequest userCreateRequest) {
+        IO.print("userCreateRequest: " + userCreateRequest);
+    }
+
 
     @GetMapping
     public List<UserResponse> getAll() {
