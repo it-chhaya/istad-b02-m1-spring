@@ -6,7 +6,9 @@ import kh.edu.istad.restfulapi.model.User;
 import kh.edu.istad.restfulapi.repository.UserRepository;
 import kh.edu.istad.restfulapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +24,10 @@ public class UserServiceImpl implements UserService {
     public void deleteById(UUID id) {
         // validate user ID
         if (!userRepository.checkById(id)) {
-            throw new RuntimeException("User not found");
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "User not found!"
+            );
         }
 
         userRepository.deleteOne(id);
