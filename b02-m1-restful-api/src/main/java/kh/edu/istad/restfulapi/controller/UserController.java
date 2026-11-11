@@ -4,6 +4,7 @@ import kh.edu.istad.restfulapi.dto.UserCreateRequest;
 import kh.edu.istad.restfulapi.dto.UserResponse;
 import kh.edu.istad.restfulapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +18,10 @@ public class UserController {
     private final UserService userService;
 
 
+    @ResponseStatus(HttpStatus.CREATED) // customize response status code
     @PostMapping
-    public void create(@RequestBody UserCreateRequest userCreateRequest) {
-        IO.print("userCreateRequest: " + userCreateRequest);
+    public UserResponse create(@RequestBody UserCreateRequest userCreateRequest) {
+        return userService.create(userCreateRequest);
     }
 
 
